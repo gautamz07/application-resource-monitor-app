@@ -3,10 +3,15 @@ import './App.css';
 import Applications from './components/applications'
 import Resources from './components/resources'
 import { Tabs } from 'antd';
+import {
+  AiFillAndroid,
+  AiFillApple 
+} from "react-icons/ai";
+
 
 function App() {
   return (
-    <div className="App">
+    <main className="ResourceMonitorApp">
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -27,20 +32,21 @@ function App() {
 
       <Tabs
         defaultActiveKey="1"
+        className='MonitorResourceWrapper'
         items={[
           {
-            label: 'Applications',
+            label: <span className='MonitorResourceWrapper__TabHeader'><AiFillAndroid/> <span className='MonitorResourceWrapper__TabText'>Applications</span></span>,
             key: '1',
             children: <Applications />,
           },
           {
-            label: 'Resources',
+            label: <span className='MonitorResourceWrapper__TabHeader'><AiFillApple/> <span className='MonitorResourceWrapper__TabText'>Resources</span></span>,
             key: '2',
             children: <Resources />,
           },
         ]}
       />
-    </div>
+    </main>
   );
 }
 

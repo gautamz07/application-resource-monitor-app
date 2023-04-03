@@ -1,7 +1,15 @@
 import react, { Component } from "react";
-import { IconName, AiOutlineCloud, AiTwotoneEnvironment, AiOutlineBarChart, AiFillDatabase, AiOutlineBlock } from "react-icons/ai";
-import { Card, Space, Drawer, Button, Tag, Statistic } from 'antd';
+import { 
+  AiOutlineBug,
+} from "react-icons/ai";
+import { Card,
+  Space,
+  Button,
+  Spin,
+  Tooltip,
+} from 'antd';
 import axiosLib from '../utils/axios' 
+import DrawerDetails from './utilComponents/drawer'
 
 class Applications extends Component {
   constructor() {
@@ -9,7 +17,8 @@ class Applications extends Component {
     this.state = {
       applications: [],
       ACTION_UI_DRAWER: false,
-      applicationDetails: []
+      applicationDetails: [],
+      loading: false,
     }
   }
 
@@ -33,76 +42,41 @@ class Applications extends Component {
       })
   }
 
+  closeDrawer() {
+    this.setState({
+      ACTION_UI_DRAWER: false,
+    })
+  }
+
   renderApplications(data = []) {
-    return (
-      <Space className='dataWrapper'
+    return (<Space className='dataWrapper'
       direction="horizontal" size={16}
       >
         { data.map(el => 
-          <Card title={el} style={{ width: 300 }}>
-             {/* <AiOutlineCloud />  */}
+          <Card title={
+            <Tooltip placement="top" title={el}>
+                {el}
+            </Tooltip>
+          } style={{ width: 250 }}>
              <Button
-              type="primary"
-              icon={<AiOutlineCloud style={{ fontSize: '1rem', marginRight: '0.25rem' }}/>} 
+              className="fetchDetailsBtn"
+              icon={<AiOutlineBug style={{ fontSize: '1rem', marginRight: '0.25rem' }} />}
               onClick={() => this.getAdditionalApplicationInfo(el)}
               >
-                Get More Info
+                More info
               </Button>
           </Card>
           )}
-          <Drawer 
-            width='50vw'
-            title="Basic Drawer"
-            placement="right"
-            onClose={
-            () => this.setState({
-              ACTION_UI_DRAWER: false
-            })
-          } open={this.state.ACTION_UI_DRAWER}>
-            <Space direction="vertical" size={16}>
-            { this.state.applicationDetails.map( appDetailedInFo => 
-              <Card title={ (<span>{`InstanceId - ${appDetailedInFo.InstanceId}`}&nbsp;<AiOutlineBlock /></span>)} style={{ width: '100%' }}>
-                <ul
-                  className="cardGranularDetails"
-                >
-                  {/* <li>
-                    <span>InstanceId :- </span>
-                    <span>{appDetailedInFo.InstanceId}</span>
-                  </li> */}
-                  <li>
-                    <span><AiFillDatabase /> :-</span>
-                    <span>{appDetailedInFo.MeterCategory}</span>
-                  </li>
-                  <li>
-                    <span><AiOutlineBarChart /> :-</span>
-                    <span>{appDetailedInFo.UnitOfMeasure}</span>
-                  </li>
-                  <li>
-                    <span><AiTwotoneEnvironment /> :-</span>
-                    <span>{appDetailedInFo.Location}</span>
-                    {/* <Statistic
-                      title={<AiTwotoneEnvironment />}
-                      value={appDetailedInFo.Location}
-                      // precision={2}
-                      valueStyle={{ color: '#cf1322' }}
-                      // prefix={<AiTwotoneEnvironment />}
-                      // suffix="%"
-                    /> */}
-                  </li>
-                </ul>
-                { appDetailedInFo.Tags && Object.values(appDetailedInFo.Tags).map(tag => <Tag color="#87d068">{tag}</Tag>) }
-              </Card>)}
-            </Space>
-          </Drawer>
+          <DrawerDetails
+            {...this.state}
+            onClick={() => this.closeDrawer()}
+          />
       </Space>
     )
   }
   render() {
     const { applications } = this.state
-
-
-
-    return applications.length ? this.renderApplications(applications) : <div>No Applications</div>
+    return applications.length ? this.renderApplications(applications) : <Spin className='loadingResource' size='large' />
   }
 }
 
