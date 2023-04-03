@@ -17,7 +17,7 @@ const DrawerDetails = (props) => {
   if(props.loading) {
     return (<Drawer 
       width='40vw'
-      title="Application - Detailed View"
+      title="Resources - Detailed View"
       placement="right"
       onClose={
         () => props.onClickClose()
@@ -29,7 +29,7 @@ const DrawerDetails = (props) => {
   }
   return (<Drawer 
     width='40vw'
-    title="Application - Detailed View"
+    title="Resources - Detailed View"
     placement="right"
     onClose={
       () => props.onClickClose()
