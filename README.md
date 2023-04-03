@@ -12,7 +12,8 @@ Design patterns used from React 15 and also React 16-17+.
 
 ### NOTES
 - React 15 pattern used for application and context api react 16+ used for resources component.
-- .env has not been added to git ignore  
+- drawer and drawerv2 duplicated deliberatly. 
+- .env has not been added to git ignore
 
 ### Things excluded.
 - Redux or any state management library.
