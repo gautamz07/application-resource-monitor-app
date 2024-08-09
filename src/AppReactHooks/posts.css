@@ -1,0 +1,24 @@
+.card {
+  padding: 1rem;
+  box-shadow: 0 0 5px rgba(0,0,0,.15);
+  margin: 2rem;
+  max-width: 200px;
+  min-width: 200px;
+  min-height: 130px;
+}
+
+.card h3 {
+  margin-top:0;
+}
+
+.card__btnPrimary {
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.container__card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}

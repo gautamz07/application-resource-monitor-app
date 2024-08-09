@@ -12,7 +12,14 @@ import axiosLib from '../utils/axios'
 import DrawerDetails from './utilComponents/drawerv2';
 
 
-const renderResources = (data = [], getAdditionalResourceInfo = () => {}, closeDrawer = () => {}, resourseDetails, ACTION_UI_DRAWER, loading) => {
+const renderResources = (
+  data = [], 
+  getAdditionalResourceInfo = () => {}, 
+  closeDrawer = () => {}, 
+  resourseDetails, 
+  ACTION_UI_DRAWER, 
+  loading
+) => {
   return (<Space className='dataWrapper'
     direction="horizontal" size={16}
     >
